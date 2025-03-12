@@ -36,7 +36,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
     final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
 
     return Scaffold(
-      backgroundColor: Colors.blue.shade50,
+      // backgroundColor: Colors.blue.shade50,
       appBar: AppBar(
         automaticallyImplyLeading: true,
         title: const Text(
@@ -46,9 +46,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
             letterSpacing: 2,
           ),
         ),
-        centerTitle: true,
-        backgroundColor: Colors.blue.shade900,
-        foregroundColor: Colors.white,
+        // centerTitle: true,
+        // backgroundColor: Colors.blue.shade900,
+        // foregroundColor: Colors.white,
       ),
       body: SafeArea(
         child: Padding(
@@ -64,13 +64,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {
+                  // Add action when a category is tapped
                   Get.to(SelectedCategoryNews(), arguments: category[index]);
                 },
                 child: Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  elevation: 5,
+                  elevation: 5, // Soft shadow for better depth
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
@@ -84,7 +85,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       child: Text(
                         category[index],
                         style: const TextStyle(
-                          color: Colors.white,
                           fontWeight: FontWeight.w600,
                           fontSize: 18,
                           letterSpacing: 1.5,

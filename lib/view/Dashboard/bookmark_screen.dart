@@ -1,5 +1,3 @@
-
-
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -14,24 +12,24 @@ class SavedArticlesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue.shade50,
+      // backgroundColor: Colors.blue.shade50,
       appBar: AppBar(
         title: const Text(
           "Saved Articles",
-          style: TextStyle(color: Colors.white),
+          // style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
-        foregroundColor: Colors.white,
-        backgroundColor: Colors.blue.shade900,
+        // foregroundColor: Colors.white,
+
         actions: [
           IconButton(onPressed: newsController.removeAllArticles,
-              icon: const Icon(Icons.delete),
+              icon: Icon(Icons.delete),
             color: Colors.red,
           )
         ],
       ),
       body: newsController.savedArticles.isEmpty
-          ? const Center(
+          ? Center(
               child: Text(
                 "No Saved Articles...",
                 style: TextStyle(fontSize: 16),
@@ -55,14 +53,13 @@ class SavedArticlesScreen extends StatelessWidget {
                             sourceName: article.sourceName.toString(),
                             sourceIcon: article.sourceIcon.toString(),
                             pubDate: article.pubDate.toString(),
-                            category: article.category!.join(', ').toString(),
-                            link: article.link,
+                            category: article.category!.join(', ').toString(), link: article.link,
                           ),
                         ),
                       );
                     },
                     child: Card(
-                      color: Colors.white,
+                      // color: Colors.white,
                       elevation: 3,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -78,7 +75,7 @@ class SavedArticlesScreen extends StatelessWidget {
                                     article.imageUrl != null &&
                                             article.imageUrl!.isNotEmpty
                                         ? article.imageUrl.toString()
-                                        : "https://images.app.goo.gl/UJ2U9tR2mj1k6sH96",
+                                        : "https://images.app.goo.gl/UJ2U9tR2mj1k6sH96", // Fallback image
                                   ),
                                   fit: BoxFit.cover,
                                 ),
@@ -87,7 +84,7 @@ class SavedArticlesScreen extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(
-                                width: 10),
+                                width: 10), // Add space between image and text
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,10 +100,12 @@ class SavedArticlesScreen extends StatelessWidget {
                                             article.title,
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
-                                            style: const TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
+
+                                            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                                fontSize: 16, fontWeight: FontWeight.bold
                                             ),
+
+
                                           ),
                                         ),
                                       ),
@@ -116,36 +115,45 @@ class SavedArticlesScreen extends StatelessWidget {
                                         child: Center(
                                           child: IconButton(
                                             onPressed: () {
+                                              // Remove the article when the icon is pressed
                                               newsController
                                                   .removeArticle(article);
                                             },
                                             icon: const Icon(
-                                              Icons.mark_chat_unread_sharp,
+                                              Icons.bookmark,
                                               size: 16,
                                               color: Colors
-                                                  .red,
+                                                  .red, // Change the icon color to red
                                             ),
                                           ),
                                         ),
                                       ),
                                     ],
                                   ),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 6, horizontal: 6),
-                                    decoration: BoxDecoration(
-                                      color: Colors.blue.shade900,
+
+                                  Card(
+                                    elevation: 2,
+                                    shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(6),
                                     ),
-                                    child: Text(
-                                      article.category != null &&
-                                              article.category!.isNotEmpty
-                                          ? article.category!.join(', ')
-                                          : "General",
-                                      style: const TextStyle(
-                                          color: Colors.white, fontSize: 12),
+                                    color: Colors.blue.shade900,
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                        child: Text(
+                                          article.category!.join(', ').toString(),
+                                          style: const TextStyle(
+                                            letterSpacing: 1,
+                                            fontSize: 12,
+                                            // color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ),
+
+
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
@@ -160,8 +168,9 @@ class SavedArticlesScreen extends StatelessWidget {
                                           article.pubDate != null
                                               ? article.pubDate.toString()
                                               : "Unknown Date",
-                                          style: const TextStyle(
-                                              color: Colors.grey),
+                                          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                                              fontSize: 14
+                                          ),
                                         ),
                                       ),
                                     ],

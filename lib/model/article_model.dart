@@ -97,6 +97,7 @@ class Article {
     };
   }
 
+
   @override
   String toString() {
     return 'Article{articleId: $articleId, title: $title, link: $link, description: $description, pubDate: $pubDate, imageUrl: $imageUrl, sourceName: $sourceName, sourceUrl: $sourceUrl, sourceIcon: $sourceIcon, language: $language, country: $country, category: $category, creator: $creator, duplicate: $duplicate, sourcePriority: $sourcePriority, videoUrl: $videoUrl, sentiment: $sentiment, sentimentStats: $sentimentStats, aiTag: $aiTag, aiRegion: $aiRegion, aiOrg: $aiOrg}';

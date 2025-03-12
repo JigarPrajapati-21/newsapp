@@ -17,10 +17,13 @@ class _DashboardState extends State<Dashboard> {
   int _selectedScreenIndex = 0;
 
   final List<Widget> _screens = [
+    // const TempScreen(),
+
     const HomeScreen(),
-    AllNewsArticleScreen(),
+     // TempScreen(),
+    AllNewsArticleScreen(), //const AllNewsScreen(),
     SearchNewsScreen(),
-    SavedArticlesScreen(),
+    SavedArticlesScreen(),//BookmarkScreen(),
     ProfileScreen(),
   ];
 
@@ -35,9 +38,13 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: Colors.blue.shade200,
+      // appBar: AppBar(
+      //   title: Text("Dashboard"),
+      // ),
 
 
-      body: SafeArea(child: _screens[_selectedScreenIndex]), // Display the currently selected screen
+      body: _screens[_selectedScreenIndex], // Display the currently selected screen
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.blue.shade900,

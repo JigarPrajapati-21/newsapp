@@ -422,6 +422,7 @@ class AllNewsController extends GetxController {
     return "";
   }
 
+  // Map language code to language name
   String getLanguageNameByCode(String code) {
     for (var language in languageList) {
       if (language.values.first == code) {
@@ -431,6 +432,7 @@ class AllNewsController extends GetxController {
     return "";
   }
 
+  // Helper methods to convert codes to display names for selected items
   List<String> getSelectedCountryNames() {
     return selectedCountries
         .map((code) => getCountryNameByCode(code))
@@ -461,6 +463,7 @@ class AllNewsController extends GetxController {
     }
   }
 
+// Remove a language by its display name
   void removeLanguage(String languageName) {
     String codeToRemove = "";
     for (var language in languageList) {
@@ -476,6 +479,7 @@ class AllNewsController extends GetxController {
     }
   }
 
+// Remove a category
   void removeCategory(String category) {
     selectedCategories.remove(category);
     update();

@@ -29,7 +29,7 @@ class Detailnews extends StatelessWidget {
     String textToSpeechString = title + description;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
           title,
@@ -38,11 +38,11 @@ class Detailnews extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
-        foregroundColor: Colors.white,
-        backgroundColor: Colors.blue.shade900,
+        // foregroundColor: Colors.white,
+        // backgroundColor: Colors.blue.shade900,
       ),
       bottomSheet: BottomAppBar(
-        color: Colors.white,
+        color: Theme.of(context).scaffoldBackgroundColor,
         elevation: 5,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 1.0),
@@ -66,6 +66,7 @@ class Detailnews extends StatelessWidget {
                   RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   backgroundColor: Colors.blue.shade900,
                   foregroundColor: Colors.white,
+                  // padding: EdgeInsetsDirectional.symmetric(vertical: 12,horizontal: 20)
                 ),
 
                 icon: Icon(Icons.link),
@@ -90,11 +91,10 @@ class Detailnews extends StatelessWidget {
               // Title
               Text(
                 title,
-                style: const TextStyle(
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 0.5,
-                  color: Colors.black87,
                 ),
               ),
               const SizedBox(height: 12),
@@ -140,14 +140,17 @@ class Detailnews extends StatelessWidget {
                   ),
                   const SizedBox(width: 16),
                   Spacer(),
-                  Icon(Icons.calendar_today, color: Colors.grey),
+                  Icon(Icons.calendar_today,
+                      color: Colors.grey
+                  ),
                   const SizedBox(width: 6),
                   Text(
                     pubDate,
-                    style: const TextStyle(
-                      color: Colors.grey,
-                      fontSize: 14,
-                    ),
+
+                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    fontSize: 14
+                  ),
+
                   ),
                 ],
               ),
@@ -156,7 +159,7 @@ class Detailnews extends StatelessWidget {
               // Source Information
               Card(
                 elevation: 0,
-                color: Colors.blue.shade50,
+                // color: Colors.blue.shade50,
                 shape: RoundedRectangleBorder(
                   side: BorderSide(color: Colors.blue.shade900),
                   borderRadius: BorderRadius.circular(10),
@@ -183,9 +186,10 @@ class Detailnews extends StatelessWidget {
                           const SizedBox(width: 12),
                           Text(
                             sourceName,
-                            style: const TextStyle(
+                            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                               fontWeight: FontWeight.w600,
-                              fontSize: 16,
+                              fontSize: 14,
+                              letterSpacing: 0.5,
                             ),
                           ),
                         ],
@@ -203,12 +207,14 @@ class Detailnews extends StatelessWidget {
               // Description
               Text(
                 description.isNotEmpty ? description : "Description not available.",
-                style: const TextStyle(
+
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.w600,
                   fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black87,
-                  height: 1.5,
+                  letterSpacing: 1.5,
+                  height: 1.5
                 ),
+
               ),
 
               const SizedBox(height: 150),

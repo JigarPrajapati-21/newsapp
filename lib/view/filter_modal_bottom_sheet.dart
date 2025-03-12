@@ -65,13 +65,14 @@ class FilterModalBottomSheet extends StatelessWidget {
                     ),
                   ),
                   selectedColor: Colors.blue.shade500,
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,//Colors.blue.shade50,
+                  unselectedColor: Colors.white,
                   selectedItemsTextStyle: TextStyle(
                     color: Colors.white,
                   ),
-                  backgroundColor: Colors.white,itemsTextStyle: TextStyle(
+                  itemsTextStyle: TextStyle(
                   color: Colors.blue.shade900,
                 ),
-                  // unselectedColor: Colors.blue.shade100,
                   decoration: BoxDecoration(
                     color: Colors.blue.withOpacity(0.05),
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -161,10 +162,13 @@ class FilterModalBottomSheet extends StatelessWidget {
 
                   ),
                   selectedColor: Colors.blue.shade500,
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,//Colors.blue.shade50,
+                  unselectedColor: Colors.white,
+
                   selectedItemsTextStyle: TextStyle(
                     color: Colors.white,
                   ),
-                  backgroundColor: Colors.white,itemsTextStyle: TextStyle(
+                itemsTextStyle: TextStyle(
                   color: Colors.blue.shade900,
                 ),
 
@@ -257,10 +261,12 @@ class FilterModalBottomSheet extends StatelessWidget {
                     ),
                   ),
                   selectedColor: Colors.blue.shade500,
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,//Colors.blue.shade50,
+                  unselectedColor: Colors.white,
                   selectedItemsTextStyle: TextStyle(
                     color: Colors.white,
                   ),
-                  backgroundColor: Colors.white,itemsTextStyle: TextStyle(
+                  itemsTextStyle: TextStyle(
                   color: Colors.blue.shade900,
                 ),
 

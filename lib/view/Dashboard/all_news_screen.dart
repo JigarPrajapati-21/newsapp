@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controller/all_news_controller.dart';
@@ -15,7 +14,7 @@ class AllNewsArticleScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue.shade50,
+      // backgroundColor: Colors.blue.shade50,
       appBar: AppBar(
         automaticallyImplyLeading: true,
         title: const Text(
@@ -27,7 +26,6 @@ class AllNewsArticleScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.blue.shade900,
       ),
       floatingActionButton: FloatingActionButton.small(
         onPressed: () {
@@ -70,6 +68,7 @@ class AllNewsArticleScreen extends StatelessWidget {
           );
         }
 
+        // Return a direct widget instead of using ListView.builder inside Obx
         return ListView.builder(
           scrollDirection: Axis.vertical,
           itemCount: controller.newsArticles.length,
@@ -82,6 +81,7 @@ class AllNewsArticleScreen extends StatelessWidget {
     );
   }
 
+  // Extract the news card building to a separate method
   Widget _buildNewsCard(BuildContext context, article,index) {
     return GestureDetector(
       onTap: () {
@@ -106,7 +106,7 @@ class AllNewsArticleScreen extends StatelessWidget {
       child: Card(
         margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         elevation: 5,
-        color: Colors.white,
+        // color: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
@@ -140,39 +140,35 @@ class AllNewsArticleScreen extends StatelessWidget {
                   child: Container(
                   ),
                 ),
+
+
                 Positioned(
-                  top: 10,
-                  right: 10,
-                  child:  Obx(
-                        () => Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: CircleAvatar(
-                        backgroundColor: Colors.grey,
-                        child: IconButton(
-                          onPressed: () {
-                            if (newsController.savedArticles
-                                .contains(article)) {
-                              newsController.removeArticle(
-                                  article);
-                            } else {
-                              newsController.saveArticle(
-                                  article);
-                            }
-                          },
-                          icon: Icon(
-                            Icons.mark_chat_unread_sharp,
-                            size: 20,
-                            color: newsController
-                                .savedArticles
-                                .contains(article)
-                                ? Colors.red
-                                : Colors.white,
-                          ),
+                  top: 15,
+                  right: 15,
+                  child: Obx(
+                        () => CircleAvatar(
+                      backgroundColor: Colors.white,
+                      child: IconButton(
+                        onPressed: () {
+                          if (newsController.savedArticles.contains(article)) {
+                            newsController.removeArticle(article);
+                          } else {
+                            newsController.saveArticle(article);
+                          }
+                        },
+                        icon: Icon(
+                          Icons.bookmark,
+                          color: newsController.savedArticles.contains(article)
+                              ? Colors.red
+                              : Colors.grey,
                         ),
                       ),
                     ),
                   ),
                 ),
+
+
+
               ],
             ),
             Padding(
@@ -180,40 +176,62 @@ class AllNewsArticleScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    article.title,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+
+              Text(
+                article.title ?? "No Title",
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontSize: 20, fontWeight: FontWeight.bold
+                ),
+              ),
                   const SizedBox(height: 6),
+
+
                   Text(
                     article.description ?? '',
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontSize: 14, color: Colors.black87),
+
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontSize: 16,
+                    ),
+
                   ),
+
+
                   const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      if (article.category != null && article.category!.isNotEmpty)
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 4, horizontal: 10),
-                          decoration: BoxDecoration(
-                            color: Colors.blue.shade900,
-                            borderRadius: BorderRadius.circular(6),
-                          ),
+
+                  if (article.category != null && article.category!.isNotEmpty)
+                    Card(
+                      elevation: 2,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      color: Colors.blue.shade900,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Text(
-                            article.category!.join(', '),
+                            article.category!.join(', ').toString(),
                             style: const TextStyle(
-                                color: Colors.white, fontSize: 12),
+                              letterSpacing: 1,
+                              fontSize: 12,
+                            ),
                           ),
                         ),
-                      const Spacer(),
+                      ),
+                    ),
+
+
+
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+
                       Row(
                         children: [
                           const Icon(
@@ -224,14 +242,17 @@ class AllNewsArticleScreen extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(left: 5),
                             child: Text(
-                              article.pubDate.toString(),
-                              style: const TextStyle(color: Colors.grey),
+                              article.pubDate ?? '',
+                              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+
+                              ),
                             ),
                           ),
                         ],
                       ),
                     ],
                   ),
+
                 ],
               ),
             ),
@@ -241,4 +262,3 @@ class AllNewsArticleScreen extends StatelessWidget {
     );
   }
 }
-

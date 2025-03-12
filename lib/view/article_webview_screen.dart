@@ -56,8 +56,6 @@ class _WebViewScreenState extends State<WebViewScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        backgroundColor: Colors.blue.shade900,
-        foregroundColor: Colors.white,
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.refresh),

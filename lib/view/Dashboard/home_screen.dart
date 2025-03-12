@@ -39,25 +39,26 @@ class _HomeScreenState extends State<HomeScreen> {
     'World'
   ];
 
+
   int selectedCategoryIndex = 0; // Default selected index
   String selectedCategory = "All";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue.shade50,
+      // backgroundColor: Colors.blue.shade50,
       // backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
           "Newsify",
-          style: TextStyle(color: Colors.white, letterSpacing: 2),
+          style: TextStyle(letterSpacing: 2),
         ),
-        centerTitle: true,
-        backgroundColor: Colors.blue.shade900,
+
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child: Stack(
+        child:
+        Stack(
           children: [
             Column(
               children: [
@@ -73,6 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         bottomLeft: Radius.circular(0)),
                   ),
                 ),
+
               ],
             ),
             SingleChildScrollView(
@@ -80,26 +82,32 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Padding(
+                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10.0),
                     child: Text(
                       "Welcome! Jigar 👋",
-                      style: TextStyle(fontSize: 16, color: Colors.white),
+
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          fontSize: 16
+                      ),
+
+
                     ),
                   ),
 
                   const SizedBox(height: 6),
-                  const Padding(
+                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10.0),
                     child: Text(
                       "Discover Breaking News",
-                      style: TextStyle(
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 12),
+
 
                   // Breaking news section
                   Padding(
@@ -107,12 +115,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                         Text(
                           "Breaking News 🔥",
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         TextButton(
                           onPressed: () {
@@ -123,8 +131,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                       const ViewAllBreakingNewsScreen(),
                                 ));
                           },
-                          child: const Text("View All",
-                              style: TextStyle(color: Colors.white)),
+                          child:  Text("View All",style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            fontSize: 16,
+                          ),
+                              ),
                         ),
                       ],
                     ),
@@ -150,16 +160,17 @@ class _HomeScreenState extends State<HomeScreen> {
                           style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
-                              color: Colors.blue.shade900),
+                              color: Colors.blue),
                         ),
                         TextButton(
                           onPressed: () {
-                            Get.to(const CategoryScreen());
+                            Get.to(CategoryScreen());
                           },
-                          child: const Text("View All",
+                          child: Text("View All",
                               style: TextStyle(
                                   // color: Colors.blue.shade900
-                                  color: Colors.blue
+                                  color: Colors.blue,
+                                fontSize: 16
                               )),
                         ),
                       ],
@@ -187,9 +198,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Card(
                               color: selectedCategoryIndex == index
                                   ? Colors
-                                      .blue.shade900
+                                      .blue.shade900 // Selected category background color
                                   : Colors.blue
-                                      .shade500,
+                                      .shade500, // Default background color
                               elevation: 5,
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
@@ -197,7 +208,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Text(
                                   category[index],
                                   style: const TextStyle(
-                                      fontSize: 16, color: Colors.white),
+                                      fontSize: 16, ),
                                 ),
                               ),
                             ),
@@ -241,8 +252,8 @@ class _HomeScreenState extends State<HomeScreen> {
         if (dataSnapShot.data!.isNotEmpty) {
           return SizedBox(
             height: MediaQuery.of(context).size.height >
-                    MediaQuery.of(context).size.width
-                ? MediaQuery.of(context).size.width / 1.1
+                MediaQuery.of(context).size.width
+                ? MediaQuery.of(context).size.width / 1.3
                 : MediaQuery.of(context).size.height / 1.2,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -256,32 +267,29 @@ class _HomeScreenState extends State<HomeScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => Detailnews(
-                          title: eachArticleData.title,
-                          imageUrl: eachArticleData.imageUrl.toString(),
-                          description: eachArticleData.description.toString(),
-                          sourceName: eachArticleData.sourceName.toString(),
-                          sourceIcon: eachArticleData.sourceIcon.toString(),
-                          pubDate: eachArticleData.pubDate.toString(),
-                          category: eachArticleData.category!
-                              .join(', ')
-                              .toString(),
-                          link: eachArticleData.link
+                            title: eachArticleData.title,
+                            imageUrl: eachArticleData.imageUrl.toString(),
+                            description: eachArticleData.description.toString(),
+                            sourceName: eachArticleData.sourceName.toString(),
+                            sourceIcon: eachArticleData.sourceIcon.toString(),
+                            pubDate: eachArticleData.pubDate.toString(),
+                            category: eachArticleData.category!
+                                .join(', ')
+                                .toString(),
+                            link: eachArticleData.link
                         ),
                       ),
                     );
                   },
                   child: Card(
-                    color: Colors.white,
                     elevation: 5,
                     shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(16),
                     ),
-                    margin: const EdgeInsets.only(
-                        right: 16, bottom: 5),
+                    margin: const EdgeInsets.only(right: 16, bottom: 5),
                     child: SizedBox(
                       width: MediaQuery.of(context).size.height >
-                              MediaQuery.of(context).size.width
+                          MediaQuery.of(context).size.width
                           ? MediaQuery.of(context).size.height / 3.3
                           : MediaQuery.of(context).size.width / 3.5,
                       child: Padding(
@@ -297,51 +305,45 @@ class _HomeScreenState extends State<HomeScreen> {
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
                                         image: NetworkImage(eachArticleData
-                                                    .imageUrl
-                                                    .toString() !=
-                                                ""
+                                            .imageUrl
+                                            .toString() !=
+                                            ""
                                             ? eachArticleData.imageUrl
-                                                .toString()
+                                            .toString()
                                             : "https://images.app.goo.gl/UJ2U9tR2mj1k6sH96"),
                                         fit: BoxFit.cover),
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(10)),
                                   ),
                                 ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Obx(
-                                      () => Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: CircleAvatar(
-                                          backgroundColor: Colors.grey,
-                                          child: IconButton(
-                                            onPressed: () {
-                                              if (newsController.savedArticles
-                                                  .contains(eachArticleData)) {
-                                                newsController.removeArticle(
-                                                    eachArticleData);
-                                              } else {
-                                                newsController.saveArticle(
-                                                    eachArticleData);
-                                              }
-                                            },
-                                            icon: Icon(
-                                              Icons.mark_chat_unread_sharp,
-                                              size: 20,
-                                              color: newsController
-                                                      .savedArticles
-                                                      .contains(eachArticleData)
-                                                  ? Colors.red
-                                                  : Colors.white,
-                                            ),
-                                          ),
+                                Positioned(
+                                  top: 8,
+                                  right: 8,
+                                  child: Obx(
+                                        () => CircleAvatar(
+                                      backgroundColor: Colors.white,
+                                      child: IconButton(
+                                        onPressed: () {
+                                          if (newsController.savedArticles
+                                              .contains(eachArticleData)) {
+                                            newsController
+                                                .removeArticle(eachArticleData);
+                                          } else {
+                                            newsController
+                                                .saveArticle(eachArticleData);
+                                          }
+                                        },
+                                        icon: Icon(
+                                          Icons.bookmark,
+                                          color: newsController.savedArticles
+                                              .contains(eachArticleData)
+                                              ? Colors.red
+                                              : Colors.grey,
                                         ),
                                       ),
                                     ),
-                                  ],
-                                )
+                                  ),
+                                ),
                               ],
                             ),
                             Padding(
@@ -350,68 +352,73 @@ class _HomeScreenState extends State<HomeScreen> {
                                 eachArticleData.title,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
+                                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                    fontSize: 16, fontWeight: FontWeight.bold
+                                ),
                               ),
                             ),
-                            const SizedBox(
-                              height: 0,
+
+                            // Responsive source name section
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Row(
+                                children: [
+                                  CircleAvatar(
+                                    backgroundImage: NetworkImage(
+                                        eachArticleData.sourceIcon.toString()),
+                                    radius: 12,
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Expanded(
+                                    child: Text(
+                                      // "aaaaaaaaaaaaa sssssssss dddddddddd eeeeeeee fffffffffffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                                      eachArticleData.sourceName.toString(),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                          fontSize: 14, fontWeight: FontWeight.bold
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                           Padding(
-                             padding: const EdgeInsets.symmetric(horizontal:  8.0),
-                             child: Row(children: [
 
-                               CircleAvatar(
-                                 backgroundImage: NetworkImage(eachArticleData.sourceIcon.toString()),
-                                 radius: 12,
-                               ),
-
-
-                               Padding(
-                                 padding:
-                                 const EdgeInsets.symmetric(horizontal: 8.0),
-                                 child: Text(
-                                   eachArticleData.sourceName.toString(),
-                                   maxLines: 2,
-                                   overflow: TextOverflow.ellipsis,
-                                   style: const TextStyle(
-                                     fontSize: 14,
-                                   ),
-                                 ),
-                               ),
-
-                             ],),
-                           ),
-
-                            const SizedBox(height: 6,),
+                            const SizedBox(height: 6),
 
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 6, horizontal: 6),
-                                    decoration: BoxDecoration(
-                                        color: Colors.blue.shade900,
-                                        borderRadius: BorderRadius.circular(6)),
+                                  // Responsive category section
+                                  Card(
+                                    elevation: 2,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    color: Colors.blue.shade900,
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 8.0),
-                                      child: Text(
-                                        eachArticleData.category!
-                                            .join(', ')
-                                            .toString(),
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          letterSpacing: 1,
-                                          fontSize: 12,
+                                          vertical: 6, horizontal: 6),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 8.0),
+                                        child: Text(
+                                          eachArticleData.category!
+                                              .join(', ')
+                                              .toString(),
+                                          style: const TextStyle(
+                                            letterSpacing: 1,
+                                            fontSize: 12,
+                                          ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
                                     ),
                                   ),
+
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
@@ -420,14 +427,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                         size: 20,
                                         color: Colors.grey,
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(6),
+                                      const SizedBox(width: 4),
+                                      Flexible(
                                         child: Text(
                                           eachArticleData.pubDate.toString(),
-                                          maxLines: 2,
+                                          maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
-                                          style: const TextStyle(
-                                              color: Colors.grey),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelSmall,
                                         ),
                                       ),
                                     ],
@@ -507,10 +515,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
 
-                    },
+                  },
                   child: Card(
-                    color: Colors.white,
+                    // color: Colors.white,
                     elevation: 5,
+                    // borderOnForeground: true,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
@@ -533,7 +542,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           const SizedBox(
-                              width: 10),
+                              width: 10), // Add space between image and text
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -546,66 +555,73 @@ class _HomeScreenState extends State<HomeScreen> {
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Text(
+                                          // "Bring Me The Horizon talk headlining Reading and Leading...",
+                                          // "Elon Musk's team may access US Education Department systems, judge rules",
                                           eachArticleData.title,
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
-                                          style: const TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold),
+                                          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                              fontSize: 16, fontWeight: FontWeight.bold
+                                          ),
                                         ),
                                       ),
                                     ),
-                                    Obx(
-                                          () => Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: CircleAvatar(
-                                          backgroundColor: Colors.grey,
+
+
+                                    Positioned(
+                                      top: 5,
+                                      right: 5,
+                                      child: Obx(
+                                            () => CircleAvatar(
+                                          backgroundColor: Colors.white,
                                           child: IconButton(
                                             onPressed: () {
-                                              if (newsController.savedArticles
-                                                  .contains(eachArticleData)) {
-                                                newsController.removeArticle(
-                                                    eachArticleData);
+                                              if (newsController.savedArticles.contains(eachArticleData)) {
+                                                newsController.removeArticle(eachArticleData);
                                               } else {
-                                                newsController.saveArticle(
-                                                    eachArticleData);
+                                                newsController.saveArticle(eachArticleData);
                                               }
                                             },
                                             icon: Icon(
-                                              Icons.mark_chat_unread_sharp,
-                                              size: 20,
-                                              color: newsController
-                                                  .savedArticles
-                                                  .contains(eachArticleData)
+                                              Icons.bookmark,
+                                              color: newsController.savedArticles.contains(eachArticleData)
                                                   ? Colors.red
-                                                  : Colors.white,
+                                                  : Colors.grey,
                                             ),
                                           ),
                                         ),
                                       ),
                                     ),
+
+
+
                                   ],
                                 ),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 6, horizontal: 6),
-                                  decoration: BoxDecoration(
-                                    color: Colors.blue.shade900,
+
+
+                                Card(
+                                  elevation: 2,
+                                  shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(6),
                                   ),
+                                  color: Colors.blue.shade900,
                                   child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0),
-                                    child: Text(
-                                      // "Music",
-                                      eachArticleData.category!
-                                          .join(', ')
-                                          .toString(),
-                                      style: const TextStyle(
-                                          color: Colors.white, fontSize: 12),
+                                    padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                      child: Text(
+                                        eachArticleData.category!.join(', ').toString(),
+                                        style: const TextStyle(
+                                          letterSpacing: 1,
+                                          fontSize: 12,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
+
+
+
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
@@ -619,8 +635,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       child: Text(
                                           // "2 Hours ago",
                                           eachArticleData.pubDate.toString(),
-                                          style: const TextStyle(
-                                              color: Colors.grey)),
+                                        style: Theme.of(context).textTheme.labelSmall?.copyWith(),
+                                        ),
                                     ),
                                   ],
                                 ),
@@ -646,6 +662,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
 //---------ListNewsCardWidget end----------------------------
 }
+
+
+
 
 
 

@@ -18,6 +18,7 @@ class ApiService {
         final responseData = jsonDecode(response.body);
         if (responseData["status"] == "success") {
           final List<dynamic> data = responseData['results'];
+          // Map the JSON data to a list of Article objects
           breakingNewsList = data.map((json) => Article.fromJson(json)).toList();
           // print(breakingNewsList);
         } else {
@@ -36,6 +37,8 @@ class ApiService {
 
   static Future<List<Article>> fetchCategoryNewsArticles(String selectedCategory) async {
     List<Article> breakingNewsList = [];
+
+
     String all= "https://newsdata.io/api/1/news?apikey=${Strings.key}&q=all&language=en,gu,hi ";
     String categoryApi="https://newsdata.io/api/1/news?apikey=${Strings.key}&language=en,gu,hi&category=$selectedCategory";
     String catApi= selectedCategory == "All"? all:categoryApi;
@@ -47,6 +50,7 @@ print("::::::::::::::::: ${response.statusCode}");
         final responseData = jsonDecode(response.body);
         if (responseData["status"] == "success") {
           final List<dynamic> data = responseData['results'];
+          // Map the JSON data to a list of Article objects
           breakingNewsList = data.map((json) => Article.fromJson(json)).toList();
           // print(breakingNewsList);
           print("___________________________");
@@ -74,7 +78,7 @@ print("::::::::::::::::: ${response.statusCode}");
   //       final responseData = jsonDecode(response.body);
   //       if (responseData["status"] == "success") {
   //         final List<dynamic> data = responseData['results'];
-  //
+  //         // Map the JSON data to a list of Article objects
   //         searchNewsList = data.map((json) => Article.fromJson(json)).toList();
   //         // print(searchNewsList);
   //       } else {

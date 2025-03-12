@@ -18,8 +18,8 @@ class AboutAppScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('About App'),
-        foregroundColor: Colors.white,
-        backgroundColor: Colors.blue.shade900,
+        // foregroundColor: Colors.white,
+        // backgroundColor: Colors.blue.shade900,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -38,9 +38,11 @@ class AboutAppScreen extends StatelessWidget {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            const Text(
+             Text(
               'Version: 1.0.0',
-              style: TextStyle(fontSize: 16, color: Colors.grey),
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                  fontSize: 16
+              ),
             ),
             const SizedBox(height: 20),
             const Text(

@@ -60,6 +60,8 @@ class _TextToSpeechButtonState extends State<TextToSpeechButton> {
 
   @override
   Widget build(BuildContext context) {
+
+
     return Column(
       children: [
         ElevatedButton.icon(
@@ -68,16 +70,17 @@ class _TextToSpeechButtonState extends State<TextToSpeechButton> {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             backgroundColor: Colors.blue.shade900,
             foregroundColor: Colors.white,
+            // padding: EdgeInsetsDirectional.symmetric(vertical: 12,horizontal: 20)
           ),
 
-          onPressed: _speak,
+          onPressed: _speak, // Assuming _speak is defined in your state
           icon: Icon(
             isSpeaking ? Icons.stop : Icons.play_arrow,
-
+            // size: 30,
             color: isSpeaking ? Colors.white : Colors.white,
           ),
           label: Text(
-            isSpeaking ? 'Speaking...' : 'Tap to speak',
+            isSpeaking ? 'Speaking...' : 'Tap to speak', // Text feedback
             style: TextStyle(
               fontSize: 16,
               color: Colors.white,

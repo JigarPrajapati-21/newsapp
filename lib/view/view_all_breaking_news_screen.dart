@@ -18,15 +18,15 @@ class _ViewAllBreakingNewsScreenState extends State<ViewAllBreakingNewsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue.shade50,
+
       appBar: AppBar(
-        backgroundColor: Colors.blue.shade900,
-        title: const Text(
+        // backgroundColor: Colors.blue.shade900,
+        title: Text(
           "Breaking News",
           style: TextStyle(color: Colors.white, letterSpacing: 1),
         ),
-        centerTitle: true,
-        foregroundColor: Colors.white,
+        // centerTitle: true,
+        // foregroundColor: Colors.white,
       ),
       body: SafeArea(
         child: FutureBuilder(
@@ -74,7 +74,7 @@ class _ViewAllBreakingNewsScreenState extends State<ViewAllBreakingNewsScreen> {
                   child: Card(
                     margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                     elevation: 5,
-                    color: Colors.white,
+
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
@@ -86,7 +86,7 @@ class _ViewAllBreakingNewsScreenState extends State<ViewAllBreakingNewsScreen> {
                             Container(
                               height: MediaQuery.of(context).size.height / 3.5,
                               width: double.infinity,
-                              margin: const EdgeInsets.all(8),
+                              margin: EdgeInsets.all(8),
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: const BorderRadius.only(
@@ -146,34 +146,57 @@ class _ViewAllBreakingNewsScreenState extends State<ViewAllBreakingNewsScreen> {
                                 eachArticleData.title ?? "No Title",
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+
+                                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                    fontSize: 20, fontWeight: FontWeight.bold
                                 ),
+
+
+
                               ),
                               const SizedBox(height: 6),
                               Text(
                                 eachArticleData.description ?? '',
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(fontSize: 14, color: Colors.black87),
+
+                                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                    fontSize: 16,
+                                ),
+
                               ),
                               const SizedBox(height: 10),
-                              Row(
-                                children: [
-                                  if (eachArticleData.category != null && eachArticleData.category!.isNotEmpty)
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
-                                      decoration: BoxDecoration(
-                                        color: Colors.blue.shade900,
-                                        borderRadius: BorderRadius.circular(6),
-                                      ),
+
+
+                              if (eachArticleData.category != null && eachArticleData.category!.isNotEmpty)
+                                Card(
+                                  elevation: 2,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  color: Colors.blue.shade900,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                       child: Text(
-                                        eachArticleData.category!.join(', '),
-                                        style: const TextStyle(color: Colors.white, fontSize: 14),
+                                        eachArticleData.category!.join(', ').toString(),
+                                        style: const TextStyle(
+                                          letterSpacing: 1,
+                                          fontSize: 12,
+                                        ),
                                       ),
                                     ),
-                                  const Spacer(),
+                                  ),
+                                ),
+
+
+
+
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+
                                   Row(
                                     children: [
                                       const Icon(
@@ -185,7 +208,9 @@ class _ViewAllBreakingNewsScreenState extends State<ViewAllBreakingNewsScreen> {
                                         padding: const EdgeInsets.only(left: 5),
                                         child: Text(
                                           eachArticleData.pubDate ?? '',
-                                          style: const TextStyle(color: Colors.grey),
+                                          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+
+                                          ),
                                         ),
                                       ),
                                     ],
